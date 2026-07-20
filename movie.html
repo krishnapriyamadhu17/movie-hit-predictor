@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Movie Hit or Flop Predictor</title>
+
+<link rel="icon" type="image/png" href="{{ url_for('static', filename='icon.png') }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background-image:
+linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.75)),
+url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600");
+
+background-size:cover;
+background-position:center;
+background-attachment:fixed;
+
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+.container{
+
+width:500px;
+background:rgba(20,20,20,.88);
+
+backdrop-filter:blur(12px);
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 0 35px rgba(255,215,0,.35);
+
+color:white;
+
+}
+
+h1{
+
+text-align:center;
+font-size:34px;
+color:#FFD700;
+
+margin-bottom:8px;
+
+}
+
+.subtitle{
+
+text-align:center;
+
+color:#ddd;
+
+margin-bottom:30px;
+
+}
+
+label{
+
+display:block;
+
+margin-top:18px;
+
+font-weight:600;
+
+}
+
+select,input{
+
+width:100%;
+
+padding:12px;
+
+margin-top:8px;
+
+border:none;
+
+border-radius:10px;
+
+background:#2c2c2c;
+
+color:white;
+
+font-size:16px;
+
+}
+
+select:focus,
+input:focus{
+
+outline:none;
+
+box-shadow:0 0 12px gold;
+
+}
+
+button{
+
+margin-top:30px;
+
+width:100%;
+
+padding:14px;
+
+font-size:18px;
+
+background:linear-gradient(90deg,#FFD700,#ff9800);
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:scale(1.04);
+
+box-shadow:0 0 20px gold;
+
+}
+
+.result{
+
+margin-top:25px;
+
+padding:18px;
+
+border-radius:12px;
+
+background:#1b1b1b;
+
+text-align:center;
+
+font-size:25px;
+
+color:#00ff95;
+
+font-weight:bold;
+
+}
+
+.footer{
+
+margin-top:25px;
+
+text-align:center;
+
+color:#bbb;
+
+font-size:14px;
+
+}
+
+.icon{
+
+font-size:60px;
+
+text-align:center;
+
+margin-bottom:10px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="icon">
+🎬
+</div>
+
+<h1>Movie Hit Predictor</h1>
+
+<p class="subtitle">
+Predict whether your movie will become a <b>Hit</b> or a <b>Flop</b>.
+</p>
+
+<form action="/predict" method="POST">
+
+<label>🎭 Genre</label>
+
+<select name="genre" required>
+
+{% for genre in genres %}
+<option value="{{ genre }}">{{ genre }}</option>
+{% endfor %}
+
+</select>
+
+
+<label>🎬 Director</label>
+
+<select name="director" required>
+
+{% for director in directors %}
+<option value="{{ director }}">{{ director }}</option>
+{% endfor %}
+
+</select>
+
+
+<label>⭐ Actor 1</label>
+
+<select name="actor1" required>
+
+{% for actor in actors1 %}
+<option value="{{ actor }}">{{ actor }}</option>
+{% endfor %}
+
+</select>
+
+
+<label>⭐ Actor 2</label>
+
+<select name="actor2" required>
+
+{% for actor in actors2 %}
+<option value="{{ actor }}">{{ actor }}</option>
+{% endfor %}
+
+</select>
+
+
+<label>⭐ Actor 3</label>
+
+<select name="actor3" required>
+
+{% for actor in actors3 %}
+<option value="{{ actor }}">{{ actor }}</option>
+{% endfor %}
+
+</select>
+
+<button type="submit">
+
+🎥 Predict Movie
+
+</button>
+
+</form>
+{% if prediction %}
+
+<div class="result">
+
+{% if prediction == "Hit" %}
+
+🎉 Congratulations! <br><br>
+
+⭐ This movie has a high chance of becoming a <span style="color:#00ff66;">HIT</span> 🍿
+
+{% else %}
+
+😔 This movie is predicted to be a <span style="color:#ff4444;">FLOP</span> 🎬
+
+{% endif %}
+
+</div>
+
+{% endif %}
+
+<div class="footer">
+
+krsna_mini project 🎞
+
+</div>
+
+</div>
+
+</body>
+</html>
